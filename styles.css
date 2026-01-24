@@ -499,15 +499,15 @@ h3 { font-size: 1.8rem; }
 
 /* Calendly Card - Floating Holographic */
 .calendly-card-holo {
-  background: rgba(45, 46, 48, 0.7);
+  background: rgba(21, 21, 22, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(68, 252, 23, 0.4);
+  border: 1px solid rgba(192, 192, 192, 0.4);
   border-radius: 16px;
   overflow: hidden;
   margin: 50px auto;
   max-width: 100%;
-  box-shadow: 0 20px 30px rgba(13, 217, 255, 0.05);
+  box-shadow: 0 20px 30px rgba(5, 5, 5, 0.05);
   transform: translateY(0);
   transition: transform 0.4s ease;
 }
@@ -525,4 +525,44 @@ h3 { font-size: 1.8rem; }
   .calendly-card-holo {
     margin: 51px 23px;
   }
+}
+/* ================================================================================= */
+/* Social & Review Buttons */
+.social-buttons,
+.google-review-btn-wrapper {
+  text-align: center;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.google-review-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #04AA6D;          /* your green */
+  color: white;
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 12px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.google-review-btn:hover {
+  background-color: #037a42;          /* darker hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(4, 170, 109, 0.4);
+}
+
+.google-review-btn .stars {
+  font-size: 1.4em;
+  color: #FFD700;                     /* gold stars */
+  letter-spacing: 2px;
+}
+
+/* Optional: Make FB button container nicer */
+.fb-like {
+  margin: 0 10px;
 }

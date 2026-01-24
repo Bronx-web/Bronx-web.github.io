@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="styles.css">
 
     <script type="application/ld+json">
     {
@@ -153,24 +153,25 @@
 
         <!-- Section 2: Flow Diagram - ORIGINAL STYLE -->
         <section class="bg-white rounded-xl shadow-md p-6 md:p-10 border border-gray-100">
-            <h2 class="text-3xl font-bold text-[#1F2937] mb-8 border-l-4 border-[#F59E0B] pl-4">How The "Matrix" Traps You</h2>
+            <h2 class="text-3xl font-bold text-[#1F2937] mb-8 border-l-4 border-[#F59E0B] pl-4">How The "Admin Matrix" Traps You</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="border border-gray-200 rounded-xl p-6 bg-gray-50 relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-2 bg-red-400"></div>
-                    <h3 class="text-xl font-bold text-gray-700 mb-6 text-center">The "Honest Tradie" Path</h3>
+                    <h3 class="text-xl font-bold text-gray-700 mb-6 text-center">The "Typical Tradie" Path</h3>
                     <div class="space-y-4 relative z-10">
                         <div class="bg-white p-4 rounded shadow text-center border-l-4 border-gray-300">
                             <span class="block font-bold text-gray-800">Customer Searches</span>
-                            <span class="text-xs text-gray-500">Relies on Word of Mouth</span>
+                            <span class="text-xs text-orange-500"> Relies on Word of Mouth/Facebook</span>
                         </div>
                         <div class="flex justify-center text-gray-400 text-2xl">↓</div>
                         <div class="bg-white p-4 rounded shadow text-center border-l-4 border-red-300">
                             <span class="block font-bold text-gray-800">Phone Call (Missed)</span>
-                            <span class="text-xs text-red-500">You're on the tools</span>
+                            <span class="text-xs text-red-500">Because You're on the tools</span>
                         </div>
                         <div class="flex justify-center text-gray-400 text-2xl">↓</div>
                         <div class="bg-white p-4 rounded shadow text-center border-l-4 border-red-300">
                             <span class="block font-bold text-gray-800">Opportunity Lost</span>
+                            <span class="text-xs text-red-500">Cycle Restarts</span>
                         </div>
                     </div>
                 </div>
@@ -181,11 +182,12 @@
                     <div class="space-y-4 relative z-10">
                         <div class="bg-white p-4 rounded shadow text-center border-l-4 border-[#04AA6D]">
                             <span class="block font-bold text-gray-800">Customer Searches</span>
-                            <span class="text-xs text-[#04AA6D]">Finds GMB Profile</span>
+                            <span class="text-xs text-[#04AA6D]">Finds you online easy</span>
                         </div>
                         <div class="flex justify-center text-[#04AA6D] text-2xl font-bold">↓</div>
                         <div class="bg-white p-4 rounded shadow text-center border-l-4 border-[#04AA6D]">
-                            <span class="block font-bold text-gray-800">Instant Online Form</span>
+                            <span class="block font-bold text-gray-800">Instant Booking</span>
+                            <span class="text-xs text-[#04AA6D]">Books you directly</span>
                         </div>
                         <div class="flex justify-center text-[#04AA6D] text-2xl font-bold">↓</div>
                         <div class="bg-[#04AA6D] p-4 rounded text-center shadow-lg">
@@ -232,28 +234,51 @@
     <!-- BRANDED PORTFOLIO FOOTER -->
     <footer class="portfolio-footer py-24 px-4 text-center">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl md:text-6xl font-black text-white mb-8 italic uppercase tracking-tighter" style="font-family: 'Poppins', sans-serif;">
-                Break Out of the Matrix
+            <h2 class="text-4xl md:text-6xl font-black text-white mb-8 uppercase tracking-tighter" style="font-family: 'Poppins', sans-serif;">
+                Break Out of the Admin Matrix
             </h2>
             <p class="text-[var(--text-secondary)] text-xl mb-12 max-w-2xl mx-auto font-light">
-                Stop letting the bigger players win. Get a <span style="color: var(--accent); font-weight: 700;">FREE Web Presence Health Check</span> today and start dominating your local area.
+                Stop wasting time. Get a <span style="color: var(--accent); font-weight: 700;">FREE Digital Health Check</span> Work Smarter not Harder. 
             </p>
             <div class="flex flex-col sm:row justify-center gap-6">
-                <button class="cta-portfolio">
-                    DM "BREAKOUT" NOW
+                <button class="cta-portfolio" onclick="window.location.href='case-study.html'">
+                    BACK TO CASE STUDY
                 </button>
-                <button class="bg-transparent border-2 border-[var(--border)] text-white py-4 px-10 rounded-lg hover:border-white transition-all uppercase font-bold text-sm tracking-widest">
+                <button class="bg-transparent border-2 border-[var(--border)] text-white py-4 px-10 rounded-lg hover:border-white transition-all uppercase font-bold text-sm tracking-widest" onclick="share()">
                     SHARE WITH A MATE
                 </button>
+
+                <script>
+                    function share() {
+                        const shareData = {
+                            title: "Helping Kiwi Trades Breakout",
+                            text: "Stop letting the bigger players win. Get a FREE Web Presence Health Check today and start dominating your local area.",
+                            url: window.location.href
+                        };
+
+                        if (navigator.share) {
+                            navigator.share(shareData)
+                                .then(() => console.log('Shared successfully'))
+                                .catch(error => console.log('Error sharing:', error));
+                        } else {
+                            console.log('Web Share API not supported');
+                        }
+                    }
+                </script>
             </div>
 
-            <div class="mt-24 pt-8 border-t border-white/10">
-                <p class="text-[0.6rem] text-gray-500 uppercase tracking-[0.4em]">
-                    Helping Kiwi Tradies Breakout &copy; 2026 | All Rights Reserved
-                </p>
-            </div>
-        </div>
-    </footer>
+            <footer class="footer">
+                <div class="section-container">
+                    <div class="footer-links">
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Service</a>
+                        <a href="contact.html">Contact</a>
+                        <a href="#">Affiliate Program</a>
+                        <a href="#">Work With Us</a>
+                    </div>
+                    <p class="footer-text">© 2026 Bronx Web | Full-Stack Digital Architect | Building Digital Solutions</p>
+                </div>
+            </footer>
 
     <script>
         Chart.defaults.font.family = "'Roboto', sans-serif";
