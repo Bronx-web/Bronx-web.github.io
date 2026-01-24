@@ -14,6 +14,18 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Digital Solutions Case Study",
+      "description": "Improved website speed, bookings, and SEO results with a modern responsive rebuild.",
+      "author": { "@type": "Organization", "name": "Bronx Web NZ" },
+      "publisher": { "@type": "Organization", "name": "Bronx Web NZ" },
+      "mainEntityOfPage": "https://www.bronxweb.nz/case-study"
+    }
+    </script>
+
 </head>
 
 <body>
@@ -217,6 +229,28 @@
         </div>
     </section>
 
+    <!-- Facebook Like + Share container – customize data-href to YOUR Facebook PAGE URL -->
+    <div class="social-buttons">
+        <!-- Like Button -->
+        <div class="fb-like" data-href="https://www.facebook.com/profile.php?id=61586053282024"
+            data-width=""
+            data-layout="button_count"
+            data-action="like"
+            data-size="large"
+            data-share="true">
+        </div>
+    </div>
+
+    <!-- Google Review Button -->
+    <div class="google-review-btn-wrapper">
+        <a href="https://g.page/r/Cef4KldmN4-gEAI/review"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="google-review-btn">
+            <span class="stars">★★★★★</span> Leave a Google Review
+        </a>
+    </div>
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="section-container">
@@ -230,7 +264,9 @@
             <p class="footer-text">© 2026 Bronx Web | Full-Stack Digital Architect | Building Digital Solutions</p>
         </div>
     </footer>
-    
+    <!-- Facebook SDK (load once) -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0"></script>
     </body>
     
     </html>
