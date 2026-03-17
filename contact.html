@@ -4,134 +4,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bronx. | Real Digital Solutions for NZ Tradies</title>
-    <meta name="description" content="Real Digital Solutions For NZ Tradies. More Jobs, More Reviews & Revenue. Local, Fast & Fair.">
-    <meta property="og:title" content="Bronx | Real Digital Solutions for NZ Tradies">
-    <meta property="og:description" content="More Jobs, More Reviews, More Revenue. Local, Fast & Fair.">
+
+    <!-- ============ SEO ============ -->
+    <title>Book a Free Strategy Call | Bronx Web — Hamilton Web Design NZ</title>
+    <meta name="description" content="Book a free 15-minute strategy call with Bronx Web Hamilton. Get a custom website for your NZ trade business. No obligation. Real advice.">
+    <link rel="canonical" href="https://www.bronxweb.nz/contact.html">
+
+    <!-- ============ OG TAGS ============ -->
+    <meta property="og:title" content="Book a Free Strategy Call | Bronx Web Hamilton NZ">
+    <meta property="og:description" content="15 minutes. No obligation. We'll map out exactly what your business needs. Real talk, real advice.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://bronxweb.nz">
-    <meta property="og:image" content="https://bronxweb.nz/images/og-image.jpg"> <!-- add a nice 1200x630 image -->
+    <meta property="og:url" content="https://www.bronxweb.nz/contact.html">
+    <meta property="og:image" content="https://www.bronxweb.nz/bronxfblogotrans.png">
+
+    <!-- ============ GOOGLE VERIFICATION ============ -->
+    <meta name="google-site-verification" content="7kXUbsEhpYH3b_LJoPCASMBe8InOv36K-T04v6wpGH8" />
+
+    <!-- ============ FONTS + STYLES ============ -->
+    <link rel="icon" type="image/x-icon" href="bronxfblogotrans.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Bronx Web NZ",
-  "url": "https://www.bronxweb.nz/contact",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "sales",
-    "telephone": "+64-20-4011-4632",
-    "email": "bronxweb@gmail.com"
-  }
-}
-</script>
+    <!-- ============ SCHEMA: Organization + ContactPoint ============ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Bronx Web NZ",
+      "url": "https://www.bronxweb.nz/",
+      "logo": "https://www.bronxweb.nz/bronxfblogotrans.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+64-20-4011-4632",
+        "email": "hello@bronxweb.nz"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hamilton",
+        "addressRegion": "Waikato",
+        "addressCountry": "NZ"
+      },
+      "sameAs": [
+        "https://www.facebook.com/bronxweb",
+        "https://share.google/KoZppt6jHDESVG7H3"
+      ]
+    }
+    </script>
 
+    <style>
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .reveal.js-ready { opacity: 0; transform: translateY(28px); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            background-color: var(--accent);
+            color: #000;
+            padding: 15px 34px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-block;
+        }
+        .btn-primary:hover { background: #fff; transform: translateY(-2px); }
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 15px 34px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-block;
+        }
+        .btn-ghost:hover { border-color: #44fc17; color: #44fc17; }
+
+        /* ===== STICKY MOBILE CTA ===== */
+        .sticky-cta {
+            display: none;
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(0,0,0,0.95);
+            border-top: 1px solid var(--border);
+            padding: 12px 20px;
+            z-index: 999;
+            backdrop-filter: blur(8px);
+        }
+        .sticky-cta a {
+            display: block;
+            background: var(--accent); color: #000;
+            text-align: center; padding: 14px;
+            border-radius: 6px; font-weight: 700;
+            font-size: 0.82rem; letter-spacing: 0.1em;
+            text-transform: uppercase; text-decoration: none;
+            transition: background 0.2s ease;
+        }
+        .sticky-cta a:hover { background: #fff; }
+        @media (max-width: 768px) {
+            .sticky-cta { display: block; }
+            body { padding-bottom: 70px; }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Navigation -->
+    <!-- ===== NAV ===== -->
     <nav class="navbar">
         <div class="nav-container">
             <button class="nav-logo" onclick="window.location.href='index.html'">BRONX</button>
-            <button class="nav-link" onclick="window.location.href='case-study.html'">Demo</button>
-            <button class="nav-link" onclick="window.location.href='services.html'">Services</button>
-            <button class="nav-link" onclick="window.location.href='contact.html'">Contact</button>
-        </div>
+            <div class="nav-menu">
+                <button class="nav-link" onclick="window.location.href='case-study.html'">Demo</button>
+                <button class="nav-link" onclick="window.location.href='services.html'">Services</button>
+                <button class="nav-link" onclick="window.location.href='contact.html'">Contact</button>
+            </div>
         </div>
     </nav>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <h1 class="fade-in-up stagger-2">Lets Build The Digital Edge For <br><span style="color: var(--accent)">Your Business.</span></h1>
-            <p class="fade-in-up stagger-3">Simple • Easy To Use • High-Converting Sites + Automated Booking System = More Time > Less Hassle • So You Can Focus On Growth Not Admin.</p>
-            <br class="fade-in-up stagger-1">
-            <br class="fade-in-up stagger-1">
-            <br class="fade-in-up stagger-1">
-            <a href="contact.html" class="cta-header fade-in-up stagger-2">SEE BELOW</a>
-        </div>
-    </header>
-    <br><br><h1 class="fade-in-up stagger-2">Let's <br>Work Together <br></h1><br><br>
-      <!-- The Card Container -->
-       <div class="calendly-card-holo">
-        <!-- Calendly Widget -->
-        <div class="calendly-inline-widget" data-url="https://calendly.com/bronxweb/bronxweb-discovery-call?hide_gdpr_banner=1" style="min-width:320px;height:700px;"></div>
-        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <main id="main">
 
-         </div>
-    </div>
-    
-    <!-- Calendly script (load once - place at bottom of body or page) -->
-    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-        <!-- Optional: Fallback text for no-JS or loading -->
-        <noscript>
-            <div style="text-align:center; color:#f1f5f9; padding:20px;">
-                <p>Calendly isn't loading? <a href="https://calendly.com/bronxweb/bronxweb-discovery-call" target="_blank" style="color:#44fc17; text-decoration:underline;">Click Here To Book Your Free Discovery Call</a>.</p>
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <h1 class="reveal">Lets Build The Digital Edge For <br><span style="color: var(--accent)">Your Business.</span></h1>
+                <p class="reveal">Simple • Easy To Use • High-Converting Sites + Automated Booking System = More Time > Less Hassle • So You Can Focus On Growth Not Admin.</p>
+                <br>
+                <br>
+                <br>
+                <a href="#book" class="btn-primary reveal">SEE BELOW</a>
             </div>
-        </noscript>
-        <!-- <section class="page-section">
-            <div class="contact-container">
-                <div class="contact-card">
-                    <form class="contact-form" onsubmit="handleSubmit(event)">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" placeholder="Your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" placeholder="your@email.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Company</label>
-                            <input type="text" placeholder="Your company or project" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Primary Challenge</label>
-                            <select required>
-                                <option value="">Select one...</option>
-                                <option>Starting Up</option>
-                                <option>Growth & Lead Generation</option>
-                                <option>Scalability & Infrastructure</option>
-                                <option>Conversion Optimization</option>
-                                <option>Vendor Fragmentation</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Tell Me More (Optional)</label>
-                            <textarea placeholder="Briefly describe your situation..." rows="4"></textarea>
-                        </div>
-                        <a href="tel:YOURPHONE" class="cta-header full-width" style="text-align:center;">Send a Text</a>
-                        <p class="form-note">We'll Reach Out Within 24 hours • No Obligations • Just Real Talk • Real Advice</p>
-                    </form>
-                </div> -->
-                <div class="contact-info">
-                    <div class="info-item">
-                        <div class="info-value">$0</div>
-                        <p>Cost for believing in yourself</p>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-value">1sec</div>
-                        <p>Live Life On Your Terms </p>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-value">15min</div>
-                        <p>To map out a clear path</p>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-value">24h</div>
-                        <p>To start making it a reality</p>
-                    </div>
-                    
+        </header>
+
+        <section id="book" class="page-section" aria-label="Book a strategy call">
+            <br><br>
+            <h1 class="reveal" style="text-align:center;">Let's <br>Work Together</h1>
+            <br><br>
+            <!-- The Card Container -->
+            <div class="calendly-card-holo reveal">
+                <!-- Calendly Widget -->
+                <div class="calendly-inline-widget" data-url="https://calendly.com/bronxweb/bronxweb-discovery-call?hide_gdpr_banner=1" style="min-width:320px;height:700px;"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+            </div>
+
+            <!-- Optional: Fallback text for no-JS or loading -->
+            <noscript>
+                <div style="text-align:center; color:#f1f5f9; padding:20px;">
+                    <p>Calendly isn't loading? <a href="https://calendly.com/bronxweb/bronxweb-discovery-call" target="_blank" style="color:#44fc17; text-decoration:underline;">Click Here To Book Your Free Discovery Call</a>.</p>
+                </div>
+            </noscript>
+
+            <div class="contact-info reveal">
+                <div class="info-item">
+                    <div class="info-value">$0</div>
+                    <p>Cost for believing in yourself</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-value">1sec</div>
+                    <p>Live Life On Your Terms</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-value">15min</div>
+                    <p>To map out a clear path</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-value">24h</div>
+                    <p>To start making it a reality</p>
                 </div>
             </div>
         </section>
+
+    </main>
+
+    <!-- ===== STICKY MOBILE CTA ===== -->
+    <div class="sticky-cta" aria-label="Book now">
+        <a href="#book">Book a Free Strategy Call</a>
     </div>
 
-    <!-- FOOTER -->
+    <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="section-container">
             <div class="footer-links">
@@ -141,11 +206,35 @@
                 <a href="#">Affiliate Program</a>
                 <a href="#">Work With Us</a>
             </div>
-            <p class="footer-text">© 2026 Bronx Web | Full-Stack Digital Architect | Building Digital Solutions</p>
+            <p class="footer-text">© 2026 Bronx Web NZ | Hamilton, Waikato | Building The Digital Edge For NZ Tradies</p>
         </div>
     </footer>
-    
-    </body>
-    
-    </html>
-    
+
+    <!-- ===== SCROLL REVEAL JS ===== -->
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+            reveals.forEach(el => el.classList.add('js-ready'));
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            reveals.forEach(el => revealObserver.observe(el));
+        }
+    </script>
+
+    <!-- ===== GOOGLE ANALYTICS ===== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KDW4HYDSGL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-KDW4HYDSGL');
+    </script>
+
+</body>
+</html>
