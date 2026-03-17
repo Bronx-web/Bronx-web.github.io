@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuoteMatrix — Instant Quotes. Zero Guesswork.</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       PAGE-SPECIFIC STYLES — QuoteMatrixLanding.html only
+       Colours always use CSS vars from styles.css :root
+    ============================================================ */
+
+    /* --- Scroll animation base state --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* --- Section helpers --- */
+    .qm-section {
+      padding: 72px 0;
+    }
+    .qm-section-dark {
+      background-color: var(--bg-lighter);
+    }
+    .qm-section-surface {
+      background-color: var(--surface);
+    }
+    .qm-section-alt {
+      background-color: var(--surface-alt);
+    }
+
+    /* --- Pill label above headings --- */
+    .qm-pill {
+      display: inline-block;
+      background: rgba(68, 252, 23, 0.12);
+      border: 1px solid rgba(68, 252, 23, 0.3);
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    /* --- Hero --- */
+    .qm-hero {
+      background: linear-gradient(145deg, var(--bg-dark) 0%, var(--bg-lighter) 100%);
+      padding: 130px 0 80px;
+      text-align: center;
+    }
+    .qm-hero h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      line-height: 1.1;
+      margin: 0.5rem 0 1.2rem;
+    }
+    .qm-hero h1 span {
+      color: var(--accent);
+    }
+    .qm-hero-sub {
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      max-width: 520px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+    .qm-hero-ctas {
+      display: flex;
+      gap: 0.85rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .qm-hero-trust {
+      margin-top: 2.4rem;
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .qm-hero-trust .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--border);
+      display: inline-block;
+    }
+
+    /* --- Ghost / outline CTA variant --- */
+    .cta-ghost {
+      background: transparent;
+      color: var(--text);
+      padding: 0.75rem 2rem;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .cta-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* --- Stats grid (responsive 3→1 col) --- */
+    .qm-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 2.5rem;
+    }
+    .qm-stat-card {
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+    .qm-stat-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .qm-stat-card:hover { transform: translateY(-8px); box-shadow: 0 24px 50px rgba(0,0,0,0.5); }
+    .qm-stat-card:hover::after { transform: scaleX(1); }
+    .qm-stat-num {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .qm-stat-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* --- Pain points --- */
+    .qm-pain-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 2rem;
+    }
+    .qm-pain-item {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      transition: border-color 0.3s ease;
+    }
+    .qm-pain-item:hover { border-color: rgba(68,252,23,0.4); }
+    .qm-pain-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .qm-pain-item p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* --- Features (2-col grid) --- */
+    .qm-features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 2.5rem;
+    }
+    .qm-feature-card {
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem 1.8rem;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .qm-feature-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .qm-feature-card:hover { transform: translateY(-6px); border-color: rgba(68,252,23,0.3); }
+    .qm-feature-card:hover::after { transform: scaleX(1); }
+    .qm-feature-icon {
+      font-size: 2rem;
+      margin-bottom: 0.9rem;
+    }
+    .qm-feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      text-align: left;
+      margin: 0 0 0.5rem;
+    }
+    .qm-feature-card p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* --- Mid-page CTA bar --- */
+    .qm-cta-bar {
+      background: linear-gradient(90deg, rgba(68,252,23,0.08) 0%, rgba(68,252,23,0.03) 100%);
+      border-top: 1px solid rgba(68,252,23,0.15);
+      border-bottom: 1px solid rgba(68,252,23,0.15);
+      padding: 3rem 0;
+      text-align: center;
+    }
+    .qm-cta-bar h2 {
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      margin-bottom: 0.75rem;
+    }
+    .qm-cta-bar p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1.75rem;
+    }
+
+    /* --- Testimonials modern cards --- */
+    .qm-testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 2.5rem;
+    }
+    .qm-testi-card {
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .qm-testi-card:hover { border-color: rgba(68,252,23,0.35); transform: translateY(-5px); }
+    .qm-testi-stars {
+      color: #facc15;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+    }
+    .qm-testi-quote {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-style: italic;
+      line-height: 1.7;
+      margin: 0;
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+    }
+    .qm-testi-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .qm-testi-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--surface-alt);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .qm-testi-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .qm-testi-role {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* --- FAQ accordion (CSS + JS) --- */
+    .qm-faq-list {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .qm-faq-item {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+    .qm-faq-item.open { border-color: rgba(68,252,23,0.35); }
+    .qm-faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: left;
+      padding: 1.2rem 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .qm-faq-q:hover { color: var(--accent); }
+    .qm-faq-chevron {
+      font-size: 1rem;
+      color: var(--accent);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .qm-faq-item.open .qm-faq-chevron { transform: rotate(180deg); }
+    .qm-faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      padding: 0 1.5rem;
+    }
+    .qm-faq-item.open .qm-faq-a { max-height: 200px; padding: 0 1.5rem 1.2rem; }
+    .qm-faq-a p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* --- Trust badges row --- */
+    .qm-trust-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(0,0,0,0.25);
+    }
+    .qm-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .qm-badge .badge-icon {
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    /* --- Contact section --- */
+    .qm-contact-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 80px 0;
+    }
+    .contact-card {
+      max-width: 560px;
+    }
+
+    /* --- Sticky mobile CTA --- */
+    .qm-sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(7,11,20,0.92);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border);
+      padding: 0.85rem 1.5rem;
+      z-index: 999;
+      text-align: center;
+    }
+    .qm-sticky-cta .cta-big {
+      width: 100%;
+      display: block;
+    }
+
+    /* --- Section headings centred --- */
+    .qm-section-head {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .qm-section-sub {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 768px) {
+      .qm-stats-grid { grid-template-columns: 1fr; gap: 16px; }
+      .qm-pain-grid { grid-template-columns: 1fr; }
+      .qm-features-grid { grid-template-columns: 1fr; }
+      .qm-testimonials-grid { grid-template-columns: 1fr; }
+      .qm-hero-ctas { flex-direction: column; align-items: stretch; padding: 0 1rem; }
+      .qm-hero-ctas .cta-big,
+      .qm-hero-ctas .cta-ghost { text-align: center; }
+      .qm-section { padding: 56px 0; }
+      .qm-sticky-cta { display: block; }
+      body { padding-bottom: 72px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <span class="nav-logo">QuoteMatrix</span>
+      <div class="nav-menu">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="qm-hero">
+    <div class="container">
+      <div class="qm-pill reveal">Quoting Software for Modern Businesses</div>
+      <h1 class="reveal reveal-delay-1">
+        Instant Quotes.<br>
+        <span>Zero Guesswork.</span>
+      </h1>
+      <p class="qm-hero-sub reveal reveal-delay-2">
+        Stop losing deals to slow quotes. QuoteMatrix generates accurate, branded quotes in under 2 minutes — so you close faster and charge what you're worth.
+      </p>
+      <div class="qm-hero-ctas reveal reveal-delay-3">
+        <a href="#contact" class="cta-big">Start for Free</a>
+        <a href="#how-it-works" class="cta-ghost">See How It Works</a>
+      </div>
+      <div class="qm-hero-trust reveal reveal-delay-4">
+        <span>No credit card required</span>
+        <span class="dot"></span>
+        <span>25 free quotes included</span>
+        <span class="dot"></span>
+        <span>Live in 5 minutes</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STATS ==================== -->
+  <section class="qm-section qm-section-dark" id="stats">
+    <div class="container">
+      <div class="qm-stats-grid">
+        <div class="qm-stat-card reveal reveal-delay-1">
+          <div class="qm-stat-num">98%</div>
+          <div class="qm-stat-label">Client Satisfaction Rate</div>
+        </div>
+        <div class="qm-stat-card reveal reveal-delay-2">
+          <div class="qm-stat-num">2 min</div>
+          <div class="qm-stat-label">Average Quote Turnaround</div>
+        </div>
+        <div class="qm-stat-card reveal reveal-delay-3">
+          <div class="qm-stat-num">+74%</div>
+          <div class="qm-stat-label">Avg. Increase in Quote Acceptance</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAIN POINTS ==================== -->
+  <section class="qm-section" id="pain">
+    <div class="container">
+      <div class="qm-pill reveal">Sound Familiar?</div>
+      <h2 class="qm-section-head reveal reveal-delay-1">Your quoting process is costing you jobs.</h2>
+      <p class="qm-section-sub reveal reveal-delay-2">
+        Most businesses lose 30% of quotes to slow turnaround, formatting errors, or underselling. Here's what that looks like day-to-day:
+      </p>
+      <div class="qm-pain-grid">
+        <div class="qm-pain-item reveal reveal-delay-1">
+          <span class="qm-pain-icon">⏳</span>
+          <p>Spending 2–3 hours building a single quote in a spreadsheet or Word doc</p>
+        </div>
+        <div class="qm-pain-item reveal reveal-delay-2">
+          <span class="qm-pain-icon">😬</span>
+          <p>Sending quotes that look amateur compared to your competitors</p>
+        </div>
+        <div class="qm-pain-item reveal reveal-delay-3">
+          <span class="qm-pain-icon">📉</span>
+          <p>Underpricing jobs because margin calculations are done manually</p>
+        </div>
+        <div class="qm-pain-item reveal reveal-delay-4">
+          <span class="qm-pain-icon">🔁</span>
+          <p>Chasing clients for approvals via long email threads or phone calls</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FEATURES ==================== -->
+  <section class="qm-section qm-section-dark" id="features">
+    <div class="container">
+      <div class="qm-pill reveal">Features</div>
+      <h2 class="qm-section-head reveal reveal-delay-1">Everything you need. Nothing you don't.</h2>
+      <p class="qm-section-sub reveal reveal-delay-2">Built specifically for trade, service, and consulting businesses that quote daily.</p>
+      <div class="qm-features-grid">
+        <div class="qm-feature-card reveal reveal-delay-1">
+          <div class="qm-feature-icon">⚡</div>
+          <h3>Lightning-Fast Quotes</h3>
+          <p>Generate fully itemised, professional quotes in under two minutes using our smart pricing engine.</p>
+        </div>
+        <div class="qm-feature-card reveal reveal-delay-2">
+          <div class="qm-feature-icon">🎨</div>
+          <h3>Branded Templates</h3>
+          <p>Your logo, your colours, your voice — every quote looks like it came from a premium agency.</p>
+        </div>
+        <div class="qm-feature-card reveal reveal-delay-3">
+          <div class="qm-feature-icon">📊</div>
+          <h3>Pricing Matrix Engine</h3>
+          <p>Define complex pricing rules once. QuoteMatrix handles the maths for every job, every time — margins, taxes, discounts.</p>
+        </div>
+        <div class="qm-feature-card reveal reveal-delay-4">
+          <div class="qm-feature-icon">✅</div>
+          <h3>One-Click Client Approval</h3>
+          <p>Clients approve digitally in one tap — no printing, no PDFs, no back-and-forth. You get notified instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HOW IT WORKS ==================== -->
+  <section class="qm-section" id="how-it-works">
+    <div class="container">
+      <div class="qm-pill reveal">Process</div>
+      <h2 class="qm-section-head reveal reveal-delay-1">Up and running in 3 steps.</h2>
+      <p class="qm-section-sub reveal reveal-delay-2">No training required. No IT team needed. Just better quotes, faster.</p>
+      <div class="how-it-works-steps">
+        <div class="step-card reveal reveal-delay-1">
+          <div class="step-number">1</div>
+          <div class="step-text">
+            <h3>Enter Job Details</h3>
+            <p>Fill in scope, materials, and labour using our guided form. Our prompts make sure you never miss a line item.</p>
+          </div>
+        </div>
+        <div class="step-card reveal reveal-delay-2">
+          <div class="step-number">2</div>
+          <div class="step-text">
+            <h3>Matrix Calculates Everything</h3>
+            <p>Your saved pricing rules apply instantly — margins, taxes, and discounts are all calculated automatically. No errors.</p>
+          </div>
+        </div>
+        <div class="step-card reveal reveal-delay-3">
+          <div class="step-number">3</div>
+          <div class="step-text">
+            <h3>Send & Close</h3>
+            <p>Deliver a polished quote by email or shareable link. Clients approve in one click. You win the job.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MID-PAGE CTA BAR ==================== -->
+  <div class="qm-cta-bar reveal">
+    <div class="container">
+      <h2>Ready to stop losing jobs to slow quotes?</h2>
+      <p>Join 1,200+ businesses already using QuoteMatrix to close more deals.</p>
+      <a href="#contact" class="cta-big">Get Started Free — No Card Required</a>
+    </div>
+  </div>
+
+  <!-- ==================== TESTIMONIALS ==================== -->
+  <section class="qm-section qm-section-surface" id="testimonials">
+    <div class="container">
+      <div class="qm-pill reveal">Social Proof</div>
+      <h2 class="qm-section-head reveal reveal-delay-1">Real results from real businesses.</h2>
+      <div class="qm-testimonials-grid">
+        <div class="qm-testi-card reveal reveal-delay-1">
+          <div class="qm-testi-stars">★★★★★</div>
+          <p class="qm-testi-quote">
+            "Before QuoteMatrix, quoting a mid-size fit-out took us half a day. Now it's done before the client gets back to their car. Genuinely game-changing."
+          </p>
+          <div class="qm-testi-author">
+            <div class="qm-testi-avatar">👷</div>
+            <div>
+              <div class="qm-testi-name">Marcus T.</div>
+              <div class="qm-testi-role">Commercial Fit-Out Contractor</div>
+            </div>
+          </div>
+        </div>
+        <div class="qm-testi-card reveal reveal-delay-2">
+          <div class="qm-testi-stars">★★★★★</div>
+          <p class="qm-testi-quote">
+            "We went from a 40% quote acceptance rate to 74% in three months. The branded quotes look so much more professional than what our competitors send."
+          </p>
+          <div class="qm-testi-author">
+            <div class="qm-testi-avatar">💼</div>
+            <div>
+              <div class="qm-testi-name">Priya S.</div>
+              <div class="qm-testi-role">Founder, Apex Cleaning Services</div>
+            </div>
+          </div>
+        </div>
+        <div class="qm-testi-card reveal reveal-delay-3">
+          <div class="qm-testi-stars">★★★★★</div>
+          <p class="qm-testi-quote">
+            "The pricing matrix alone saved us from underquoting on a $60k job. It paid for itself in week one."
+          </p>
+          <div class="qm-testi-author">
+            <div class="qm-testi-avatar">🏗️</div>
+            <div>
+              <div class="qm-testi-name">Daniel R.</div>
+              <div class="qm-testi-role">Director, Ridgeline Civil</div>
+            </div>
+          </div>
+        </div>
+        <div class="qm-testi-card reveal reveal-delay-4">
+          <div class="qm-testi-stars">★★★★★</div>
+          <p class="qm-testi-quote">
+            "Setup took 15 minutes and my first quote went out the same day. Clients keep commenting on how professional it looks."
+          </p>
+          <div class="qm-testi-author">
+            <div class="qm-testi-avatar">🔧</div>
+            <div>
+              <div class="qm-testi-name">Sarah M.</div>
+              <div class="qm-testi-role">Owner, SM Plumbing & Gas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TRUST BADGES ==================== -->
+  <section class="qm-section qm-section-dark">
+    <div class="container">
+      <p class="qm-section-sub reveal" style="margin-bottom:0;">Trusted by growing businesses across trades, services, and consulting.</p>
+      <div class="qm-trust-row reveal reveal-delay-1">
+        <div class="qm-badge"><span class="badge-icon">🔒</span> SSL Encrypted</div>
+        <div class="qm-badge"><span class="badge-icon">☁️</span> Cloud-Based</div>
+        <div class="qm-badge"><span class="badge-icon">📱</span> Mobile-Ready</div>
+        <div class="qm-badge"><span class="badge-icon">🔄</span> Auto Backup</div>
+        <div class="qm-badge"><span class="badge-icon">🎯</span> GDPR Compliant</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ==================== -->
+  <section class="qm-section" id="faq">
+    <div class="container">
+      <div class="qm-pill reveal">FAQ</div>
+      <h2 class="qm-section-head reveal reveal-delay-1">Common questions, straight answers.</h2>
+      <div class="qm-faq-list">
+
+        <div class="qm-faq-item reveal reveal-delay-1">
+          <button class="qm-faq-q" aria-expanded="false">
+            How long does it take to get set up?
+            <span class="qm-faq-chevron">▼</span>
+          </button>
+          <div class="qm-faq-a">
+            <p>Most users are sending their first quote within 15 minutes of signing up. Add your business details, upload a logo, and set your pricing rules — that's it. No training calls required.</p>
+          </div>
+        </div>
+
+        <div class="qm-faq-item reveal reveal-delay-2">
+          <button class="qm-faq-q" aria-expanded="false">
+            Is it really free to start?
+            <span class="qm-faq-chevron">▼</span>
+          </button>
+          <div class="qm-faq-a">
+            <p>Yes — no credit card, no trial period. Your first 25 quotes are completely free. After that, plans start from $29/month with unlimited quotes. Cancel any time.</p>
+          </div>
+        </div>
+
+        <div class="qm-faq-item reveal reveal-delay-3">
+          <button class="qm-faq-q" aria-expanded="false">
+            Can I customise quotes with my branding?
+            <span class="qm-faq-chevron">▼</span>
+          </button>
+          <div class="qm-faq-a">
+            <p>Absolutely. Upload your logo, set your brand colours, add custom headers and footers, and include your terms and conditions. Every quote goes out looking 100% on-brand.</p>
+          </div>
+        </div>
+
+        <div class="qm-faq-item reveal reveal-delay-4">
+          <button class="qm-faq-q" aria-expanded="false">
+            How do clients approve quotes?
+            <span class="qm-faq-chevron">▼</span>
+          </button>
+          <div class="qm-faq-a">
+            <p>Clients receive a link to a clean, mobile-friendly quote page. They review it, click "Approve", and you get an instant notification. No account needed on their end. No back-and-forth.</p>
+          </div>
+        </div>
+
+        <div class="qm-faq-item reveal">
+          <button class="qm-faq-q" aria-expanded="false">
+            What industries does QuoteMatrix work for?
+            <span class="qm-faq-chevron">▼</span>
+          </button>
+          <div class="qm-faq-a">
+            <p>QuoteMatrix is used by trades (construction, plumbing, electrical), professional services (consulting, marketing, IT), cleaning businesses, event companies, and more. If you quote jobs, it works for you.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT FORM ==================== -->
+  <section class="qm-section qm-section-alt" id="contact">
+    <div class="qm-contact-wrap container">
+      <div class="qm-pill reveal">Get Started</div>
+      <h2 class="qm-section-head reveal reveal-delay-1">Request a Demo or Ask a Question</h2>
+      <p class="qm-section-sub reveal reveal-delay-2" style="margin-bottom:2rem;">
+        We'll reply within one business day. No sales pressure — just real answers.
+      </p>
+      <div class="contact-card reveal reveal-delay-3">
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+          </div>
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="Your Business Name" />
+          </div>
+          <div class="form-group">
+            <label for="interest">I'm interested in</label>
+            <select id="interest" name="interest">
+              <option value="">Select an option…</option>
+              <option value="demo">Live Demo</option>
+              <option value="quote">Getting a Quote</option>
+              <option value="pricing">Pricing Information</option>
+              <option value="other">Something Else</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell us about your quoting needs…"></textarea>
+          </div>
+          <button type="submit" class="cta-big">Send Message</button>
+          <p class="form-note">No spam. We respond within 1 business day.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FINAL CTA BANNER ==================== -->
+  <section class="cta-footer reveal">
+    <div class="container">
+      <div class="qm-pill" style="margin-bottom:1rem;">Free to Start</div>
+      <h2>Stop losing jobs to slow quotes.</h2>
+      <p style="color:var(--text-secondary);max-width:480px;margin:0 auto 2rem;font-size:0.95rem;">
+        Join 1,200+ businesses. No credit card. No setup fees. Your first 25 quotes are on us.
+      </p>
+      <a href="#contact" class="cta-big">Get Started Free</a>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:1.5rem;">
+        <span class="nav-logo" style="font-size:1.1rem;">QuoteMatrix</span>
+      </div>
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+      <p class="footer-text">© 2026 QuoteMatrix. All rights reserved. Built for businesses that move fast.</p>
+    </div>
+  </footer>
+
+  <!-- ==================== STICKY MOBILE CTA ==================== -->
+  <div class="qm-sticky-cta">
+    <a href="#contact" class="cta-big">Start for Free — No Card Required</a>
+  </div>
+
+  <!-- ==================== JS: Scroll reveal + FAQ accordion ==================== -->
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // FAQ accordion
+    document.querySelectorAll('.qm-faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.qm-faq-item');
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.qm-faq-item').forEach(i => i.classList.remove('open'));
+        document.querySelectorAll('.qm-faq-q').forEach(b => b.setAttribute('aria-expanded', 'false'));
+        // Toggle clicked
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Hide sticky CTA after contact section comes into view
+    const contactSection = document.getElementById('contact');
+    const stickyBar = document.querySelector('.qm-sticky-cta');
+    if (contactSection && stickyBar) {
+      const stickyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          stickyBar.style.opacity = e.isIntersecting ? '0' : '1';
+          stickyBar.style.pointerEvents = e.isIntersecting ? 'none' : 'auto';
+        });
+      }, { threshold: 0.2 });
+      stickyObserver.observe(contactSection);
+    }
+  </script>
+
+</body>
+</html>
